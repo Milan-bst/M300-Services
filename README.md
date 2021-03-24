@@ -30,12 +30,17 @@ Sachen, welche ich in diesem Kapitel erledigt habe:
 - Vagrant installiert
 - Visual Studio Code mit Github verbunden, Extensions installiert und als Mardown Editor ausgewählt 
 
-### Vagrant Umgebung
+## 20 - Infrastruktur
+Sachen, welche ich in diesem Kapitel erledigt habe:
+- Lesen der Dokumente
+- Dokumentation im .md File angefangen zu schreiben
+
+## Vagrant Umgebung
 
 Um eine Vagrant VM mit einer Box zu erstellen muss man zuerst in einem Ordner seiner Wahl das Vagrantfile erstellen für die Konfigurationen der VM. Dies geht mit dem command "vagrant init [VM-Aus-Cloud](https://app.vagrantup.com/ubuntu/boxes/)". Nachdem dieses Config File erstellt ist kann man dieses verändern. Die Config Files sehen je nach VM anders aus. Die wichtigstens änderungen, welche man vornehmen kann ist die IP adresse, die menge an RAM und Cores sowie commands welche beim Einrichten bereits in der Shell ausgeführt werden sollen beim erstellen der VM. Sobald mann alle Konfigurationen vorgenommen hat kann man mit dem Befehl vagrant up die VM erstellen. Wenn dies gemacht wurde, benutzt man den command vagrant ssh um sich mit dieser VM zu verbinden.
 
     +---------------------------------------------------------------+
-    ! Notebook - Schulnetz 10.x.x.x und Privates Netz 192.168.1.1   !                 
+    ! Notebook - Schulnetz 10.x.x.x und Privates Netz 192.168.1.1   !                                                              
     ! Port: 8080 (192.158.1.2:80)                                   !	
     !                                                               !	
     !                    +--------------------+                     !
@@ -43,12 +48,12 @@ Um eine Vagrant VM mit einer Box zu erstellen muss man zuerst in einem Ordner se
     !                    ! Host: web01        !                     !
     !                    ! IP: 192.168.1.2    !                     !
     !                    ! Port: 80           !                     !
-    !                    ! Nat: 8080          !                     !
+    !                    ! Nat: 187           !                     !
     !                    +--------------------+                     !
     !                                                               !	
     +---------------------------------------------------------------+
 
-#### Basic Vagrant Befehle
+### Basic Vagrant Befehle
 
 Befehl | Erklärung | Beispiel
 ------------ | ------------- | -------------
@@ -61,7 +66,7 @@ Befehl | Erklärung | Beispiel
 `vagrant destroy` | Löscht VM | -
 `vagrant -v` | Zeigt Vagrant Version an | -
 
-## 20 - Infrastruktur
+## Zugriff mit Putty
 
-## Vagrant Umgebung
-
+In dem Vagrant File habe ich den Port 22 auf den Port 2222 weitergeleitet und sollte somit in der Lage sein von meinem Laptop aus mit dem Port 2222 auf die Vagrant VM zuzugreifen was auch funktioniert hat.
+![Putty-Bild](https://github.com/Milan-bst/M300-Services/blob/main/putty.JPG)
