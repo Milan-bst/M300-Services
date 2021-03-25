@@ -78,7 +78,7 @@ Befehl | Erklärung | Beispiel
 `vagrant -v` | Zeigt Vagrant Version an | -
 
 ### Netzwerkplan
-![Putty-Bild](https://github.com/Milan-bst/M300-Services/blob/main/netzwerkplan.JPG)
+![Netzwerkplan](https://github.com/Milan-bst/M300-Services/blob/main/Netzwerkplan.jpg)
 
 ### Erklärung der Commands aus dem VagrantFile
 
