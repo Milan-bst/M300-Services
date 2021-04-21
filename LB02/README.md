@@ -18,6 +18,10 @@ Mit Vagrant hatte ich vor der LB01 nicht viel Erfahrung, jedoch konnte ich in di
 
 Ich habe mit Docker schon im Geschäft einmal gearbeitet jedoch nicht wirklich lange da ich nur einge Applikationen in Docker Containern getestet habe jedoch war dies bereits schon sehr lehrreich darüber wie Docker funktionieren und wie Docker files aufgebaut sind.
 
+## Wissenszuwachs
+
+In dieser LB konnte ich einiges lernen die wichtigsten Dinge meiner Meinung nach sind die Folgenden: Ich konnte mein Wissen über Docker erweitern um es genauer zu sagen mein Wissen über die Befehle um Docker Container zu verwalten und ebenfalls mein Wissen für die Commands, welche in den Dockerfiles verwendet werden. Mittlerweile muss ich auch sagen, dass ich Markdown besser finde als Word wenn es um Dokumentationen geht, welche mit der IT zu tun haben da es einfach deutlich angenehmer ist mit Markdown zu schreiben da die Formatierung grösstenteils automatisch gemacht wird.
+
 ## Docker
 
 Docker ist eine Freie Software zur Isolierung von Anwendungen mit Hilfe von Containervirtualisierung. Docker vereinfacht die Bereitstellung von Anwendungen, weil sich Container, die alle nötigen Pakete enthalten, leicht als Dateien transportieren und installieren lassen.
@@ -157,3 +161,95 @@ USER NeuerUserName
 
 WORKDIR /homeNeuerUserName
 ```
+
+#### Ready-Only
+
+Wenn Docker mit der Option Ready-Only gestartet wird, können keine Änderungen am Dateisystem vorgenommen werden (Auch nicht mit sudo). Der Command um einen Docker im Read-Only Modus zu starten sieht folgender massen aus:
+```
+docker run --read-only -d -t --name NameDesContainer Image
+```
+
+### Dockerfiles
+Ein weiterer Aspekt der Sicherheit von Containern ist das Dockerfile selbst, wenn man diese nicht selbst schreibt, kann man sich nie genau sicher sein was man für einen Container in sein Netzwerk einbindet. Deshalb kann es immer sein dass sich dort eine Art von Mallware oder gar ein Virus versteckt.
+
+## Docker Hub
+
+### Image bereitstellen
+
+Am Anfang muss man einen Container erstellen, mit dem Image, welches auf die Docker Cloud gepusht werden soll. Wenn dies gemacht wurde muss folgender Befehl im CMD ausgeführt werden.
+```
+docker commit [Container ID des oben erstellten Containers] [Dockerhub Username]/[Gewünschter Name]:[Tag]
+```
+Wenn dies erledigt wurde kann man mit folgendem Befehl das Ganze auf Docker Hub pushen:
+```
+docker push [Docker Hub Username]/[GewünschterName]:[Tag]
+```
+
+### Image Pullen
+Sobald das Image hochgeladen wurde kann man es wie jedes andere Image auf Docker Hub herunterladen mit dem folgenden Command:
+```
+docker pull [Docker Hub Username]/[GewünschterName]:[Tag]
+```
+
+## Kubernetes
+Hier muss ein deployment File erstellt werden, welches ich deployment.yaml genannt habe, mit dem folgdenen Inhalt.
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Kubernetes-M300
+  labels:
+    app: Kubernetes-M300
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: Kubernetes-M300
+  template:
+    metadata:
+      labels:
+        app: Kubernetes-M300
+    spec:
+      containers:
+      - name: Kubernetes-M300
+        image: kub
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+```
+
+Sobald dieses File erstellt wurde muss man es auch ausführen und somit die "Container", welche dort definiert wurde erstellen. Der Command dafür ist folgender:
+```
+kubectl apply -f deployment.yaml
+```
+
+## Service
+
+Hier werde ich noch einen Loadbalancer für Apache Webserver aufsetzten
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: Loadbalancer
+  annotations:
+    service.beta.kubernetes.io/linode-loadbalancer-throttle: "4"
+  labels:
+    app: M300
+spec:
+  type: LoadBalancer
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: M300
+  sessionAffinity: None
+  ```
+
+Hier gilt es zu beachten das alle bei "app" den gleichen Eintrag haben müssen da der Loadbalancer sonst einige Probleme haben wird. Sobald man dieses File erstellt hat kann man das ganze wieder mit dem folgenden Command ausführen.
+```
+kubectl apply -f FileName.yaml
+```
+
