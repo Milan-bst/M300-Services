@@ -14,7 +14,7 @@ Mit Virtualisierung hab ich ebenfalls schon viel Erfahrung da ich bereits am Anf
 
 Mit Vagrant hatte ich vor der LB01 nicht viel Erfahrung, jedoch konnte ich in dieser LB bereits viel über Vagrant lernen sprich die wichtigstens Commands, für welche zwecke man es benutzen kann, wie die Vagrant Files zu strukturieren sind und noch einiges mehr.
 
-### Docker / Kubernets
+### Docker / Kubernetes
 
 Ich habe mit Docker schon im Geschäft einmal gearbeitet jedoch nicht wirklich lange da ich nur einge Applikationen in Docker Containern getestet habe jedoch war dies bereits schon sehr lehrreich darüber wie Docker funktionieren und wie Docker files aufgebaut sind.
 
@@ -129,6 +129,7 @@ Inhalt des Index File:
 </html>
 ```
 In diesem File habe ich den Link zu meinem GitHub Repository der LB02 eingefügt. Nach den Anpassungen sieht die Website nun folgendermassen aus.
+
 ![Website](https://github.com/Milan-bst/M300-Services/blob/main/LB02/Website.JPG)
 
 ### Monitoring
